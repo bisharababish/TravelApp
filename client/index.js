@@ -1,4 +1,21 @@
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .then((registration) => {
+        console.log('Service Worker registered: ', registration);
+      })
+      .catch((error) => {
+        console.log('Service Worker registration failed: ', error);
+      });
+  });
+}
+
 import { fetchTravelData } from './js/app.js';
+
+fetchTravelData("Paris")
+  .then((data) => console.log("Travel Data:", data))
+  .catch((error) => console.error("Error:", error));
 
 document.addEventListener('DOMContentLoaded', async () => {
   const location = 'New York';

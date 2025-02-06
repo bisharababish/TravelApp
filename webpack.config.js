@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
 
 module.exports = (env) => {
     const isProduction = env.NODE_ENV === 'production';
@@ -33,9 +33,9 @@ module.exports = (env) => {
             }),
             ...(isProduction
                 ? [
-                    new WorkboxPlugin.GenerateSW({
-                        clientsClaim: true,
-                        skipWaiting: true,
+                    new InjectManifest({
+                        swSrc: './sw.js',
+                        swDest: 'service-worker.js',
                     }),
                 ]
                 : []),

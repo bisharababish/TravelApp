@@ -2,6 +2,7 @@
     "name": "fend-capstone-travel-app",
     "version": "1.0.0",
     "description": "Travel App for FEND Capstone Project",
+    "type": "module",
     "scripts": {
         "start": "node server/server.js",
         "build": "webpack --config webpack.config.js",
@@ -9,21 +10,40 @@
         "dev": "webpack serve --config webpack.config.js"
     },
     "dependencies": {
-        "express": "^4.17.1",
-        "workbox-webpack-plugin": "^6.0.0"
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "node-fetch": "^2.7.0"
     },
     "devDependencies": {
         "@babel/core": "^7.26.7",
         "@babel/preset-env": "^7.26.7",
+        "@babel/preset-react": "^7.26.3",
+        "babel-jest": "^29.7.0",
         "babel-loader": "^9.2.1",
         "css-loader": "^7.1.2",
         "html-webpack-plugin": "^5.6.3",
-        "jest": "^27.0.0",
+        "jest": "^27.5.1",
         "sass": "^1.83.4",
         "sass-loader": "^16.0.4",
         "style-loader": "^4.0.0",
+        "supertest": "^7.0.0",
         "webpack": "^5.97.1",
         "webpack-cli": "^6.0.1",
-        "webpack-dev-server": "^5.2.0"
+        "webpack-dev-server": "^5.2.0",
+        "workbox-webpack-plugin": "^7.3.0"
+    },
+    "jest": {
+        "transform": {
+            "^.+\\.js$": "babel-jest"
+        },
+        "moduleFileExtensions": [
+            "js",
+            "json"
+        ],
+        "testEnvironment": "node",
+        "transformIgnorePatterns": [
+            "/node_modules/(?!node-fetch)/"
+        ]
     }
 }
