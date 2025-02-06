@@ -3,7 +3,7 @@ import request from 'supertest';
 
 describe('Express Server', () => {
   afterAll((done) => {
-    server.close(done); // Properly close the server
+    server.close(done); 
   });
 
   it('should respond with 200 status for the home route', async () => {
