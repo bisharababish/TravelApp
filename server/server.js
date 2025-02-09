@@ -3,20 +3,20 @@ import cors from 'cors';
 import fetch from 'node-fetch';
 
 const app = express();
-app.use(express.json());
+const port = 3000;
+
 app.use(cors());
+app.use(express.static('dist'));
 
 app.get('/', (req, res) => {
-  res.send('Welcome to the Travel App API');
+  res.send('Welcome to the Travel App');
 });
 
-app.use((req, res) => {
-  res.status(404).send('Route not found');
-});
+export default app;
 
-const PORT = process.env.PORT || 3000;
-const server = app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
-export { app, server };
+// Check if the file is being run directly
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
