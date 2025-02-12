@@ -1,5 +1,7 @@
+import { jest } from '@jest/globals';
 import { fetchTravelData } from './app';
 
+// Mock the fetch function
 global.fetch = jest.fn(() =>
     Promise.resolve({
         json: () =>
@@ -18,7 +20,7 @@ global.fetch = jest.fn(() =>
                 ],
                 hits: [
                     {
-                        webformatURL: 'https://example.com/image.jpg',
+                        webformatURL: 'https://tinyurl.com/bdzb8tjw',
                     },
                 ],
             }),
@@ -33,14 +35,14 @@ describe('fetchTravelData', () => {
         expect(data.longitude).toBe('-74.0060');
         expect(data.temperature).toBe(15);
         expect(data.weatherDescription).toBe('Clear sky');
-        expect(data.imageUrl).toBe('https://example.com/image.jpg');
+        expect(data.imageUrl).toBe('https://tinyurl.com/bdzb8tjw'); // Ensure this matches the mock data
     });
 
     it('should return placeholder data for an invalid location', async () => {
         fetch.mockImplementationOnce(() => Promise.reject(new Error('Location not found')));
         const data = await fetchTravelData('InvalidLocation');
         expect(data).toEqual({
-            location: 'New York',
+            location: 'InvalidLocation',
             latitude: '',
             longitude: '',
             temperature: '',

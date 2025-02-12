@@ -1,6 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const port = 3000;
@@ -14,8 +19,7 @@ app.get('/', (req, res) => {
 
 export default app;
 
-// Check if the file is being run directly
-if (require.main === module) {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
   });
