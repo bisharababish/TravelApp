@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import fetch from 'node-fetch';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -11,7 +10,7 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
-app.use(express.static('dist'));
+app.use(express.static('dist')); // Serve static files from the 'dist' directory
 
 app.get('/', (req, res) => {
   res.send('Welcome to the Travel App');
