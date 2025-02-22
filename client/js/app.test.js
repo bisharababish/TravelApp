@@ -6,18 +6,23 @@ global.fetch = jest.fn(() =>
     Promise.resolve({
         json: () =>
             Promise.resolve({
+                // Geonames API response
                 geonames: [
                     {
                         lat: '40.7128',
                         lng: '-74.0060',
                     },
                 ],
+                // Weatherbit API response
                 data: [
                     {
                         temp: 15,
-                        weather: { description: 'Clear sky' },
+                        weather: {
+                            description: 'Clear sky',
+                        },
                     },
                 ],
+                // Pixabay API response
                 hits: [
                     {
                         webformatURL: 'https://tinyurl.com/bdzb8tjw',
@@ -35,7 +40,7 @@ describe('fetchTravelData', () => {
         expect(data.longitude).toBe('-74.0060');
         expect(data.temperature).toBe(15);
         expect(data.weatherDescription).toBe('Clear sky');
-        expect(data.imageUrl).toBe('https://tinyurl.com/bdzb8tjw'); // Ensure this matches the mock data
+        expect(data.imageUrl).toBe('https://tinyurl.com/bdzb8tjw');
     });
 
     it('should return placeholder data for an invalid location', async () => {
@@ -48,6 +53,7 @@ describe('fetchTravelData', () => {
             temperature: '',
             weatherDescription: '',
             imageUrl: '',
+            error: 'Location not found', // Add the error field
         });
     });
 });

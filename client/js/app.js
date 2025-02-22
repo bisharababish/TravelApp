@@ -1,15 +1,16 @@
+// API configuration
 const apiConfig = {
   geonames: {
     url: 'http://api.geonames.org/searchJSON',
-    username: 'bisharababish',
+    username: process.env.REACT_APP_GEONAMES_USERNAME, // Store in .env
   },
   weatherbit: {
     url: 'https://api.weatherbit.io/v2.0/current',
-    apiKey: '9a750d1eb6264ec08b199adf330bbea3',
+    apiKey: process.env.REACT_APP_WEATHERBIT_API_KEY, // Store in .env
   },
   pixabay: {
     url: 'https://pixabay.com/api/',
-    apiKey: '48571413-8c5433ffd3b763d0e53118687',
+    apiKey: process.env.REACT_APP_PIXABAY_API_KEY, // Store in .env
   },
   placeholderData: {
     location: 'New York',
@@ -18,9 +19,11 @@ const apiConfig = {
     temperature: '',
     weatherDescription: '',
     imageUrl: '',
+    error: '', // Add an error field
   },
 };
 
+// Fetch geolocation data from Geonames
 const fetchGeonamesData = async (location) => {
   const { url, username } = apiConfig.geonames;
   try {
@@ -40,6 +43,7 @@ const fetchGeonamesData = async (location) => {
   }
 };
 
+// Fetch weather data from Weatherbit
 const fetchWeatherbitData = async (latitude, longitude) => {
   const { url, apiKey } = apiConfig.weatherbit;
   const response = await fetch(`${url}?lat=${latitude}&lon=${longitude}&key=${apiKey}`);
@@ -53,6 +57,7 @@ const fetchWeatherbitData = async (latitude, longitude) => {
   throw new Error('Weather data not found');
 };
 
+// Fetch image data from Pixabay
 const fetchPixabayData = async (location) => {
   const { url, apiKey } = apiConfig.pixabay;
   const response = await fetch(`${url}?key=${apiKey}&q=${location}&image_type=photo`);
@@ -65,13 +70,18 @@ const fetchPixabayData = async (location) => {
   throw new Error('Image not found');
 };
 
+// Primary function to fetch travel data
 export const fetchTravelData = async (location) => {
   try {
+    if (!location) {
+      throw new Error('Please enter a valid location.');
+    }
+
     const { latitude, longitude } = await fetchGeonamesData(location);
     const { temperature, weatherDescription } = await fetchWeatherbitData(latitude, longitude);
     const { imageUrl } = await fetchPixabayData(location);
 
-    const travelData = {
+    return {
       ...apiConfig.placeholderData,
       location,
       latitude,
@@ -80,13 +90,12 @@ export const fetchTravelData = async (location) => {
       weatherDescription,
       imageUrl,
     };
-
-    return travelData;
   } catch (error) {
-    console.error('Error fetching travel data:', error);
+    console.error('Error fetching travel data:', error.message);
     return {
       ...apiConfig.placeholderData,
       location,
+      error: error.message || 'Failed to fetch travel data. Please try again.',
     };
   }
 };

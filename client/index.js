@@ -13,26 +13,27 @@ if ('serviceWorker' in navigator) {
 
 import { fetchTravelData } from './js/app.js';
 
-fetchTravelData("Paris")
-  .then((data) => console.log("Travel Data:", data))
-  .catch((error) => console.error("Error:", error));
-
+// Example usage of fetchTravelData
 document.addEventListener('DOMContentLoaded', async () => {
-  const location = 'New York';
+  const location = 'New York'; // Default location
   const travelData = await fetchTravelData(location);
 
   const weatherDiv = document.getElementById('weather');
   const imageDiv = document.getElementById('image');
 
-  weatherDiv.innerHTML = `
-    <h2>${travelData.location}</h2>
-    <p>Latitude: ${travelData.latitude}</p>
-    <p>Longitude: ${travelData.longitude}</p>
-    <p>Temperature: ${travelData.temperature}°C</p>
-    <p>Weather: ${travelData.weatherDescription}</p>
-  `;
+  if (travelData.error) {
+    weatherDiv.innerHTML = `<p>Error: ${travelData.error}</p>`;
+  } else {
+    weatherDiv.innerHTML = `
+      <h2>${travelData.location}</h2>
+      <p>Latitude: ${travelData.latitude}</p>
+      <p>Longitude: ${travelData.longitude}</p>
+      <p>Temperature: ${travelData.temperature}°C</p>
+      <p>Weather: ${travelData.weatherDescription}</p>
+    `;
 
-  imageDiv.innerHTML = `
-    <img src="${travelData.imageUrl}" alt="${travelData.location}" />
-  `;
+    imageDiv.innerHTML = `
+      <img src="${travelData.imageUrl}" alt="${travelData.location}" />
+    `;
+  }
 });
