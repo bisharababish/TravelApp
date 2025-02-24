@@ -17,8 +17,9 @@
 ### Installation:
 #### 1. Run `npm install` to install dependencies.
 #### 2. Run `npm start` to start the server.
-#### 3. Open `http://localhost:9000` in your browser.
-#### 4. npx http-server dist for existing https servers
+#### 3. Run `npm run build`
+#### 4. Open `http://localhost:9000` in your browser.
+#### 5. npx http-server dist for existing https servers
 
 
 ### Dependencies:
