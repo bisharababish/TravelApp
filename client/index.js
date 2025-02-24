@@ -13,10 +13,11 @@ if ('serviceWorker' in navigator) {
 
 import { fetchTravelData } from './js/app.js';
 
-// Example usage of fetchTravelData
 document.addEventListener('DOMContentLoaded', async () => {
+  console.log('DOM fully loaded and parsed');
   const location = 'New York'; // Default location
   const travelData = await fetchTravelData(location);
+  console.log('Travel Data:', travelData);
 
   const weatherDiv = document.getElementById('weather');
   const imageDiv = document.getElementById('image');

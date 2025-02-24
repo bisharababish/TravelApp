@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A travel app that provides weather and image information for your destination.">
   <title>Travel App</title>
-  <!-- Webpack will inject the compiled CSS here -->
+  <link rel="stylesheet" href="../styles/styles.scss">
 </head>
 <body>
-  <header role="banner">
+  <header>
     <h1>Welcome to the Travel App</h1>
   </header>
 
-  <main role="main">
-    <section id="weather-section" class="content-section" aria-labelledby="weather-heading">
-      <h2 id="weather-heading" class="visually-hidden">Weather Information</h2>
-      <div id="weather" class="weather-info" role="region" aria-live="polite"></div>
+  <main>
+    <section id="weather-section" class="content-section">
+      <h2>Weather Information</h2>
+      <div id="weather" class="weather-info"></div>
     </section>
 
-    <section id="image-section" class="content-section" aria-labelledby="image-heading">
-      <h2 id="image-heading" class="visually-hidden">Travel Image</h2>
-      <div id="image" class="travel-image" role="img" aria-label="Image of the travel destination"></div>
+    <section id="image-section" class="content-section">
+      <h2>Travel Image</h2>
+      <div id="image" class="travel-image"></div>
     </section>
   </main>
 
-  <script src="bundle.js"></script>
+  <script type="module" src="index.js"></script>
 </body>
 </html>

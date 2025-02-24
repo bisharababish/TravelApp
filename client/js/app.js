@@ -2,15 +2,15 @@
 const apiConfig = {
   geonames: {
     url: 'http://api.geonames.org/searchJSON',
-    username: process.env.REACT_APP_GEONAMES_USERNAME, // Store in .env
+    username: process.env.REACT_APP_GEONAMES_USERNAME, // Ensure this is set in .env
   },
   weatherbit: {
     url: 'https://api.weatherbit.io/v2.0/current',
-    apiKey: process.env.REACT_APP_WEATHERBIT_API_KEY, // Store in .env
+    apiKey: process.env.REACT_APP_WEATHERBIT_API_KEY, // Ensure this is set in .env
   },
   pixabay: {
     url: 'https://pixabay.com/api/',
-    apiKey: process.env.REACT_APP_PIXABAY_API_KEY, // Store in .env
+    apiKey: process.env.REACT_APP_PIXABAY_API_KEY, // Ensure this is set in .env
   },
   placeholderData: {
     location: 'New York',
@@ -19,7 +19,7 @@ const apiConfig = {
     temperature: '',
     weatherDescription: '',
     imageUrl: '',
-    error: '', // Add an error field
+    error: '',
   },
 };
 
