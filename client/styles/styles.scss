@@ -25,70 +25,81 @@ header {
     }
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
+main {
+    padding: 20px;
+}
 
-    li {
-        display: inline;
-        margin: 0 15px;
+// Input section
+#input-section {
+    margin-bottom: 20px;
+    text-align: center;
 
-        a {
-            color: $white;
-            text-decoration: none;
-            font-size: 1.1rem;
+    #location-input {
+        padding: 10px;
+        font-size: 1rem;
+        width: 200px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-            &:hover {
-                text-decoration: underline;
-            }
+    #search-button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        background-color: $secondary-color;
+        color: $white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: darken($secondary-color, 10%);
         }
     }
 }
 
-section {
-    padding: 20px;
-    margin: 20px 0;
+// Weather and image sections
+#weather-section,
+#image-section {
+    margin-top: 20px;
+    text-align: center;
 
     h2 {
         color: $primary-color;
         font-size: 1.8rem;
+        margin-bottom: 10px;
     }
 
     p {
         font-size: 1rem;
         line-height: 1.6;
     }
-}
 
-// Buttons
-button {
-    background-color: $secondary-color;
-    color: $white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-        background-color: darken($secondary-color, 10%);
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        margin-top: 10px;
     }
 }
 
 // Responsive styles
 @media (max-width: 768px) {
-    nav ul li {
-        display: block;
-        margin: 10px 0;
-    }
-
     header h1 {
         font-size: 1.5rem;
     }
 
-    section {
-        padding: 10px;
+    #input-section {
+        #location-input {
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 10px;
+        }
+
+        #search-button {
+            width: 100%;
+        }
     }
 }
 
@@ -97,7 +108,8 @@ button {
         font-size: 1.2rem;
     }
 
-    section {
-        padding: 5px;
+    #weather-section,
+    #image-section {
+        padding: 10px;
     }
 }

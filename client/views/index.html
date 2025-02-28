@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel App</title>
-  <link rel="stylesheet" href="../styles/styles.scss">
+  <link rel="stylesheet" href="../styles/styles.css"> 
 </head>
 <body>
   <header>
@@ -12,17 +12,23 @@
   </header>
 
   <main>
-    <section id="weather-section" class="content-section">
-      <h2>Weather Information</h2>
-      <div id="weather" class="weather-info"></div>
+    <section id="input-section">
+      <h2>Enter a Location</h2>
+      <input type="text" id="location-input" placeholder="Enter a city or country">
+      <button id="search-button">Search</button>
     </section>
 
-    <section id="image-section" class="content-section">
+    <section id="weather-section">
+      <h2>Weather Information</h2>
+      <div id="weather"></div>
+    </section>
+
+    <section id="image-section">
       <h2>Travel Image</h2>
-      <div id="image" class="travel-image"></div>
+      <div id="image"></div>
     </section>
   </main>
 
-  <script type="module" src="index.js"></script>
+  <script type="module" src="./index.js"></script>
 </body>
 </html>

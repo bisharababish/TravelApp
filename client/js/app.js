@@ -28,7 +28,11 @@ const fetchGeonamesData = async (location) => {
   const { url, username } = apiConfig.geonames;
   try {
     const response = await fetch(`${url}?q=${location}&maxRows=1&username=${username}`);
+    if (!response.ok) {
+      throw new Error(`Geonames API Error: ${response.statusText}`);
+    }
     const data = await response.json();
+    console.log('Geonames API Response:', data); // Debugging
     if (data.geonames && data.geonames.length > 0) {
       return {
         latitude: data.geonames[0].lat,
@@ -46,28 +50,50 @@ const fetchGeonamesData = async (location) => {
 // Fetch weather data from Weatherbit
 const fetchWeatherbitData = async (latitude, longitude) => {
   const { url, apiKey } = apiConfig.weatherbit;
-  const response = await fetch(`${url}?lat=${latitude}&lon=${longitude}&key=${apiKey}`);
-  const data = await response.json();
-  if (data.data && data.data.length > 0) {
-    return {
-      temperature: data.data[0].temp,
-      weatherDescription: data.data[0].weather.description,
-    };
+  try {
+    const response = await fetch(`${url}?lat=${latitude}&lon=${longitude}&key=${apiKey}`);
+    if (!response.ok) {
+      throw new Error(`Weatherbit API Error: ${response.statusText}`);
+    }
+    const data = await response.json();
+    console.log('Weatherbit API Response:', data); // Debugging
+    if (data.data && data.data.length > 0) {
+      return {
+        temperature: data.data[0].temp,
+        weatherDescription: data.data[0].weather.description,
+      };
+    } else {
+      throw new Error('Weather data not found');
+    }
+  } catch (error) {
+    console.error('Weatherbit API Error:', error);
+    throw error;
   }
-  throw new Error('Weather data not found');
 };
 
 // Fetch image data from Pixabay
 const fetchPixabayData = async (location) => {
   const { url, apiKey } = apiConfig.pixabay;
-  const response = await fetch(`${url}?key=${apiKey}&q=${location}&image_type=photo`);
-  const data = await response.json();
-  if (data.hits && data.hits.length > 0) {
-    return {
-      imageUrl: data.hits[0].webformatURL,
-    };
+  try {
+    const response = await fetch(`${url}?key=${apiKey}&q=${location}&image_type=photo`);
+    if (!response.ok) {
+      throw new Error(`Pixabay API Error: ${response.statusText}`);
+    }
+    const data = await response.json();
+    console.log('Pixabay API Response:', data); // Debugging
+    if (data.hits && data.hits.length > 0) {
+      // Select a random image from the hits array
+      const randomIndex = Math.floor(Math.random() * data.hits.length);
+      return {
+        imageUrl: data.hits[randomIndex].webformatURL,
+      };
+    } else {
+      throw new Error('Image not found');
+    }
+  } catch (error) {
+    console.error('Pixabay API Error:', error);
+    throw error;
   }
-  throw new Error('Image not found');
 };
 
 // Primary function to fetch travel data
