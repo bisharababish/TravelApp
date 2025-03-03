@@ -47,8 +47,7 @@
 
 #### 1. Run `npm install` to install dependencies.
 #### 2. Run `npm start` to start the server.
-#### 3. Open `http://localhost:9000` in your browser.
+#### 3. Open `http://localhost:9001` in your browser.
 #### 4. npx http-server dist for existing https servers
 
 #### node  version: v22.11.0
-#### paris, new york, belgium as random pics

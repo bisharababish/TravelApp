@@ -125,3 +125,34 @@ export const fetchTravelData = async (location) => {
     };
   }
 };
+
+document.getElementById("search-button")?.addEventListener("click", async () => {
+  const location = document.getElementById("location-input").value;
+
+  try {
+    const data = await fetchTravelData(location);
+    console.log("Travel Data:", data);
+
+    // Update the UI with the fetched data
+    const weatherElement = document.getElementById("weather");
+    const imageElement = document.getElementById("image");
+
+    if (weatherElement) {
+      weatherElement.innerHTML = `
+        <p>Temperature: ${data.temperature}°C</p>
+        <p>Weather: ${data.weatherDescription}</p>
+      `;
+    }
+    if (imageElement) {
+      imageElement.innerHTML = `
+        <img src="${data.imageUrl}" alt="Travel Image" style="max-width: 100%;">
+      `;
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    const weatherElement = document.getElementById("weather");
+    if (weatherElement) {
+      weatherElement.innerHTML = `<p>Error: ${error.message}</p>`;
+    }
+  }
+});
